@@ -1,1 +1,43 @@
-<p>properties-page works!</p>
+<h1>Mutations</h1>
+<hr>
+
+<div class="row">
+  <div class="col-6">
+
+    <input
+      type="text"
+      class="form-control mt-3"
+      placeholder="Email"
+      #textEmail
+      (input)="onFiedlUpdated('email', textEmail.value)"
+      [value]="user().email"
+    >
+
+    <input
+      type="text"
+      class="form-control mt-3"
+      placeholder="First Name"
+      #textFirstName
+      (input)="onFiedlUpdated('first_name', textFirstName.value )"
+      [value]="user().first_name"
+    >
+
+    <input
+      type="text"
+      class="form-control mt-3"
+      placeholder="Last Name"
+      #textLastname
+      (input)="onFiedlUpdated('last_name', textLastname.value )"
+      [value]="user().last_name"
+    >
+
+  </div>
+
+  <div class="col-6">
+    <!-- User data -->
+    <pre>
+      {{ user() | json }}
+      <strong>{{ fullName() }}</strong>
+    </pre>
+  </div>
+</div>
