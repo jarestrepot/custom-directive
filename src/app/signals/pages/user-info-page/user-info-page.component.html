@@ -4,11 +4,15 @@
 <div class="row">
   <div class="col-4">
     <h3>Current user: {{ userId() }} </h3>
-    <button (click)="loadUser( userId() - 1 )" class="btn btn-primary">
+    <button *ngIf=" userId() !== 1 " (click)="loadUser( userId() - 1 )" class="btn btn-primary">
       Previous
     </button>
     &nbsp;
-    <button (click)="loadUser( userId() + 1 )" class="btn btn-primary">Next</button>
+    <button
+      (click)="loadUser( userId() + 1 )"
+      class="btn btn-primary"
+      *ngIf="userWasFound()"
+    >Next</button>
   </div>
 
   <div
