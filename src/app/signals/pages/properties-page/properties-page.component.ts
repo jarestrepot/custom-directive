@@ -1,11 +1,11 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, effect, signal } from '@angular/core';
 import { User } from '../../interfaces/users-request.interface';
 
 @Component({
   templateUrl: './properties-page.component.html',
   styleUrls: ['./properties-page.component.css']
 })
-export class PropertiesPageComponent {
+export class PropertiesPageComponent implements OnInit, OnDestroy {
 
   public user = signal<User>({
     id: 1,
@@ -15,7 +15,27 @@ export class PropertiesPageComponent {
     avatar: "https://reqres.in/img/faces/1-image.jpg"
   });
 
-  public fullName = computed( () => `${ this.user().first_name } ${ this.user().last_name }`)
+  public counter = signal<number>( 1 );
+
+  public fullName = computed( () => `${ this.user().first_name } ${ this.user().last_name }`);
+
+  // Solo se ejecuta cuando se monta el componente y cada vez que cambian sus dependencias.
+  public userChangedEffect = effect( () => {
+    console.log( `${ this.user().first_name } - ${ this.counter() }`)
+  });
+
+  ngOnInit(): void {
+  }
+
+  // Destruir el efecto manualmente.
+  ngOnDestroy(): void {
+    this.userChangedEffect.destroy();
+  }
+
+  incriesBy( value:number = 1  ):void{
+    this.counter.update( counter => counter + value )
+  }
+
 
   // keyof User only keys for user interface
   onFiedlUpdated( field: keyof User , value: string ):void {

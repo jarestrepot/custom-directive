@@ -31,6 +31,13 @@
       [value]="user().last_name"
     >
 
+    <button
+      class="btn btn-primary mt-3"
+      (click)="incriesBy()"
+    >
+      Incrementar
+    </button>
+
   </div>
 
   <div class="col-6">
@@ -38,6 +45,9 @@
     <pre>
       {{ user() | json }}
       <strong>{{ fullName() }}</strong>
+      <code class="text-primary fs-4">
+        {{ counter() }}
+      </code>
     </pre>
   </div>
 </div>
