@@ -15,6 +15,7 @@ export class CounterPageComponent {
   increaseBy( value:number ):void {
 
     // this.counter.set( this.counter() + 1 );
+    // Mutación del signal oldValue => oldValue + newValue
     this.counter.update( current => current + value );
 
   }
